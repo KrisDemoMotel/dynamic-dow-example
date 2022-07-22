@@ -1,0 +1,14 @@
+version: 2.1
+
+jobs:
+  build-and-deploy:
+    docker:
+      - image: cimg/base:stable
+    resource_class: small
+    steps:
+      - run: echo "time to deploy!"
+      
+workflows:
+  deploy:
+    jobs:
+      - deploy
