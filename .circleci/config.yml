@@ -1,0 +1,26 @@
+version: 2.1
+
+setup: true
+
+orbs:
+  continuation: circleci/continuation@0.3.1
+
+jobs:
+  build-and-deploy:
+    docker:
+      - image: cimg/base:stable
+    resource_class: small
+    steps:
+      - checkout
+      #determine day of week, then hour of day, then based on that, load a different configruation file.
+      - run: |
+          dow=$(date +%u)
+          hod=$(date +%H)
+          if [[ $hod -gt 7 && $hod -lt 18 && $dow -lt 5 ]]; then cp .circleci/configio.yml .circleci/nextconfig.yml; else cp .circleci/configooo.yml .circleci/nextconfig.yml; fi
+          command: "cat .circleci/nextconfig.yml"
+      - continuation/continue:
+          configuration_path: .circleci/nextconfig.yml
+workflows:
+  say-hello-workflow:
+    jobs:
+      - build-and-deploy
