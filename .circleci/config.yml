@@ -6,7 +6,7 @@ orbs:
   continuation: circleci/continuation@0.3.1
 
 jobs:
-  build-and-deploy:
+  deploychecks:
     docker:
       - image: cimg/base:stable
     resource_class: small
@@ -17,10 +17,10 @@ jobs:
           dow=$(date +%u)
           hod=$(date +%H)
           if [[ $hod -gt 7 && $hod -lt 18 && $dow -lt 5 ]]; then cp .circleci/configio.yml .circleci/nextconfig.yml; else cp .circleci/configooo.yml .circleci/nextconfig.yml; fi
-          command: "cat .circleci/nextconfig.yml"
+          cat .circleci/nextconfig.yml
       - continuation/continue:
           configuration_path: .circleci/nextconfig.yml
 workflows:
-  say-hello-workflow:
+  deploychecks:
     jobs:
-      - build-and-deploy
+      - weekday-check
