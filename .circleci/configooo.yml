@@ -1,0 +1,19 @@
+version: 2.1
+
+jobs:
+  deploy:
+    docker:
+      - image: cimg/base:stable
+    resource_class: small
+    steps:
+      - checkout
+      - run:
+          name: "deploy logic goes here!"
+          command: "echo deploying..."
+workflows:
+  say-hello-workflow:
+    jobs:
+      - hold:
+          type: approval
+      - deploy:
+          requires: hold
