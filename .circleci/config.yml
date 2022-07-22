@@ -18,7 +18,7 @@ jobs:
           command: |
             dow=$(date +%u)
             hod=$(date +%H)
-            if [[ $hod -gt 7 && $hod -lt 18 && $dow -lt 5 ]]; 
+            if [[ $hod -gt 5 && $hod -lt 22 && $dow -lt 6 ]]; 
             then cp .circleci/configio.yml .circleci/nextconfig.yml; 
             else cp .circleci/configooo.yml .circleci/nextconfig.yml; 
             fi
