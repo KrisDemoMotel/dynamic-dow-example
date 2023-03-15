@@ -9,4 +9,4 @@ As we start the workflow, we check for the day of week and time of day using the
 
 Currently this is not a very DRY setup, as the two configs are completely seperate. Ideally, we should instead have it so that it modifies the workflow to add a hold step.
 
-The timezone should be confirmed so it can comply with your requested one!
+The timezone should be confirmed so it can comply with your requested one
